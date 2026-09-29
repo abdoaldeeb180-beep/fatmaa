@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار حب فاطمة كشري 🤍</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #ff758c, #ff7eb3);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            color: #d63384;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        .btn {
+            background-color: #ff4b6e;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 75, 110, 0.4);
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ff7eb3;
+            border-radius: 10px;
+            font-size: 16px;
+            text-align: center;
+            outline: none;
+        }
+        .step {
+            display: none;
+        }
+        .step.active {
+            display: block;
+        }
+        #result-text {
+            color: #333;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+        .heart {
+            font-size: 45px;
+            animation: pulse 1s infinite alternate;
+            margin-bottom: 10px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- شاشة البداية -->
+        <div id="step-0" class="step active">
+            <div class="heart">❤️</div>
+            <h2>اختبار حب فاطمة كشري 😉</h2>
+            <p style="color: #666; margin-bottom: 20px; font-size: 14px;">تعالي نشوف إنتِ حافظاني بجد ولا فصال!</p>
+            <button class="btn" onclick="nextStep(1)">ابدأ الاختبار</button>
+        </div>
+
+        <!-- السؤال الأول -->
+        <div id="step-1" class="step">
+            <h2>1. بتحبيني قد إيه؟ 😍</h2>
+            <button class="btn" onclick="nextStep(2)">قد الدنيا كلها 🌍</button>
+            <button class="btn" onclick="nextStep(2)">أكتر من نفسي بكتير ❤️</button>
+            <button class="btn" onclick="wrongLove()">مش بحبك 😒</button>
+        </div>
+
+        <!-- السؤال الثاني (تاريخ الميلاد) -->
+        <div id="step-2" class="step">
+            <h2>2. إيه تاريخ عيد ميلادي بالتحديد؟ 🎂</h2>
+            <input type="text" id="ans-date" placeholder="اكتبي التاريخ هنا...">
+            <button class="btn" onclick="checkDate()">التالي</button>
+        </div>
+
+        <!-- السؤال الثالث -->
+        <div id="step-3" class="step">
+            <h2>3. أنا بشتغل إيه أساساً؟ 💻</h2>
+            <button class="btn" onclick="nextStep(4)">صيانة كمبيوتر وهاردوير 🛠️</button>
+            <button class="btn" onclick="wrongJob()">طباخ كشري 🍜</button>
+            <button class="btn" onclick="wrongJob()">سواق تكتك 🛺</button>
+        </div>
+
+        <!-- السؤال الرابع -->
+        <div id="step-4" class="step">
+            <h2>4. انتي مسمياني اي يجعفر؟ 🐛</h2>
+            <input type="text" id="ans-name" placeholder="اكتبي اللقب هنا...">
+            <button class="btn" onclick="checkName()">التالي</button>
+        </div>
+
+        <!-- السؤال الخامس -->
+        <div id="step-5" class="step">
+            <h2>5. اي اكتر كلمه انتي بتقوليها؟ 🗣️</h2>
+            <input type="text" id="ans-word" placeholder="اكتبي الكلمة هنا...">
+            <button class="btn" onclick="checkWord()">التالي</button>
+        </div>
+
+        <!-- النتيجة النهائية -->
+        <div id="step-6" class="step">
+            <div class="heart">💖</div>
+            <h2>يا فنانة! 🎉</h2>
+            <p id="result-text">
+                مبروك نجحتي ف الاختبار يفاطمه كشري وتستاهلي احلي بوسه هاتي سكرين واتس واستلمي جايزتك 😘🔥
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function showStep(stepIndex) {
+            document.querySelectorAll('.step').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-' + stepIndex).classList.add('active');
+        }
+
+        function nextStep(stepIndex) {
+            showStep(stepIndex);
+        }
+
+        function wrongLove() {
+            alert("نعم يا عوني؟! عيدي الكلمة دي كده واختاري عدل! 😂👊");
+        }
+
+        function wrongJob() {
+            alert("غلط يا كشري! ده أنا عيني بتطلع في الصيانة وانتي تقولي كده 😂❌");
+        }
+
+        function checkDate() {
+            let val = document.getElementById('ans-date').value.trim();
+            if(val === "") {
+                alert("لازم تكتبي الإجابة يا روحي، مفيش هروب! 😂");
+                return;
+            }
+            if(val.includes("9/5") || val.includes("9-5") || val.includes("5/9") || val.includes("٩/٥") || val.includes("٩-٥")) {
+                nextStep(3);
+            } else {
+                alert("غلط يا بطتي! ركزي كده وتفكري كويس 😂🎂");
+            }
+        }
+
+        function checkName() {
+            let val = document.getElementById('ans-name').value.trim().toLowerCase();
+            if(val === "") {
+                alert("اكتبي مسمياني إيه! 😂");
+                return;
+            }
+            if(val.includes("دوده") || val.includes("دودة")) {
+                nextStep(5);
+            } else {
+                alert("لا مش ده يا جعفر! 😂 ركزي أنتِ مسمياني إيه ع الموبايل.");
+            }
+        }
+
+        function checkWord() {
+            let val = document.getElementById('ans-word').value.trim();
+            if(val === "") {
+                alert("سيبي التفكير واكتبي كلمتك الشهيرة! 😂");
+                return;
+            }
+            if(val.includes("وبعدين") || val.includes("اه") || val.includes("أه") || val.includes("ايه") || val.includes("إيه")) {
+                showStep(6);
+            } else {
+                alert("لا مش دي يا جعفر! 😂 فكري كويس.");
+            }
+        }
+    </script>
+
+</body>
+</html>
